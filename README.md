@@ -1,1 +1,2 @@
-# ANPR-OpenCV
+# OpenCV-PlateRecognition
+Repositorio de reconocimiento de patentes

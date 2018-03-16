@@ -1,0 +1,46 @@
+//////////////////////////////////////////////////////////////
+/// Header
+//////////////////////////////////////////////////////////////
+#include "CPUDetection.h"
+
+//////////////////////////////////////////////////////////////
+/// Constructor class
+//////////////////////////////////////////////////////////////
+CPUDetection::CPUDetection(ConfigManagement * Config) : PlateDetection(Config)
+{
+
+	if (!cCascade.load(Config->GetConfigValue(HARD_CASCADE_DIR)))
+	{
+
+		std::cout << "ANPR --> Error al cargar el archivo classifier CPU \n";
+
+	}
+
+}
+
+//////////////////////////////////////////////////////////////
+/// Destructor class
+//////////////////////////////////////////////////////////////
+CPUDetection::~CPUDetection()
+{
+
+	///< NULL
+
+}
+
+//////////////////////////////////////////////////////////////
+/// Find plate 
+//////////////////////////////////////////////////////////////
+std::vector<cv::Rect> CPUDetection::findRegion(cv::Mat iFrame, cv::Size minSize, cv::Size maxSize)
+{
+    std::vector<cv::Rect> plateResult;
+
+	//	Equalize histogram
+	cv::equalizeHist(iFrame, iFrame);
+
+	//	TODO > Possible Scale: 1.05
+	//	Detect
+	cCascade.detectMultiScale(iFrame, plateResult, 1.1, 3, CV_HAAR_DO_CANNY_PRUNING, minSize, maxSize);
+
+	return plateResult;
+}

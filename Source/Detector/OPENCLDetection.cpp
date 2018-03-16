@@ -1,0 +1,50 @@
+//////////////////////////////////////////////////////////////
+/// Header
+//////////////////////////////////////////////////////////////
+#include "OPENCLDetection.h"
+
+//////////////////////////////////////////////////////////////
+/// Constructor class
+//////////////////////////////////////////////////////////////
+OPENCLDetection::OPENCLDetection(ConfigManagement * Config) : PlateDetection(Config)
+{
+	//	Enable openCL
+	cv::ocl::setUseOpenCL(true);
+
+	//	Check openCL
+	if (cv::ocl::haveOpenCL())
+    {
+		if (!cCascade.load(Config->GetConfigValue(HARD_CASCADE_DIR)))
+		{
+
+			std::cout << "ANPR --> Error al cargar el archivo classifier GPU \n";
+
+		}
+    }
+    else
+    {
+
+    	std::cout << "ANPR --> Error al iniciar OpenCL \n";
+
+    }
+}
+
+//////////////////////////////////////////////////////////////
+/// Destructor class
+//////////////////////////////////////////////////////////////
+OPENCLDetection::~OPENCLDetection()
+{
+
+	//	TODO: Implement!
+	
+}
+
+//////////////////////////////////////////////////////////////
+/// Find plate 
+//////////////////////////////////////////////////////////////
+std::vector<cv::Rect> OPENCLDetection::findRegion(cv::Mat iFrame, cv::Size minSize, cv::Size maxSize)
+{
+    std::vector<cv::Rect> rectData;
+    
+    return rectData;
+}

@@ -1,0 +1,1 @@
+g++ -o ANPR main.cpp Source/Config/ConfigManagement.cpp Source/Video/VideoProcess.cpp Source/Detector/CPUDetection.cpp Source/Detector/DetectorFactory.cpp Source/Detector/OPENCLDetection.cpp Source/Detector/PlateDetection.cpp Source/General/Utility.cpp `pkg-config --cflags --libs opencv`
